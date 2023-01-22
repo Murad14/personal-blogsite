@@ -32,7 +32,11 @@ app.get('/compose', (req, res) => {
 })
 
 app.post('/compose', (req, res) => {
-  console.log(req.body.inputText);
+  var post = {
+    title: req.body.postTitle,
+    content: req.body.postBody
+  };
+  console.log(post);
   res.redirect('/');
 })
 
