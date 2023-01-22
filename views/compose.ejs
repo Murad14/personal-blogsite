@@ -1,8 +1,15 @@
 <%- include('partials/header'); -%>
     <h1>Compose</h1>
     <form method="post" action="/compose">
-        <label for="inputText"></label>
-        <input type="text" id="inputText" name="inputText" placeholder="Enter your text here" size="50" maxlength="100" style="width:500px">
-        <input type="submit" value="Publish">
-      </form>
-<%- include('partials/footer'); -%>
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type="text" id="inputText" name="inputText" placeholder="Enter your text here"
+                size="50" maxlength="100" style="width:500px">
+            <label>Post</label>
+            <textarea class="form-control" name="postBody" rows="5" cols="30"></textarea>
+
+        </div>
+        <button class="btn btn-primary" type="submit" name="button">Publish</button>
+
+    </form>
+    <%- include('partials/footer'); -%>
