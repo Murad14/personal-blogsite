@@ -41,7 +41,10 @@ app.post('/compose', (req, res) => {
   res.redirect('/');
 })
 
-
+// Route Parameters
+app.get('/posts/:postName', (req, res) => {
+  console.log(req.params.postName);
+})
 
 
 
