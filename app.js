@@ -43,7 +43,17 @@ app.post('/compose', (req, res) => {
 
 // Route Parameters
 app.get('/posts/:postName', (req, res) => {
-  console.log(req.params.postName);
+  const requestedTitle = req.params.postName;
+
+  POSTS.forEach(post => {
+    const storedTitle = post.title;
+
+    if (storedTitle === requestedTitle) {
+      console.log("Match");
+  }
+  });
+
+   
 })
 
 
