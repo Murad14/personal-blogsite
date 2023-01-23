@@ -5,9 +5,17 @@
         <%= homeStartingContent %>
     </p>
     <% POSTS.forEach(function(post){ %>
-        <p><h1><%= (post.title) %></h1></p>
-        <p><%= (post.content) %></p>
-            <% }) %>
-        
+        <p>
+        <h1>
+            <%= post.title %>
+        </h1>
+        </p>
+        <p>
+            <%= post.content.substring(0, 100) + " ..." %>
+                <a href="/posts/<%= post.title %> ">Read More</a>
+        </p>
 
-<%- include('partials/footer'); -%>
+        <% }) %>
+
+
+            <%- include('partials/footer'); -%>

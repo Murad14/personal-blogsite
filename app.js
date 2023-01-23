@@ -18,15 +18,15 @@ app.use(express.static("public"));
 
 
 app.get('/', (req, res) => {
-  res.render('home', {homeStartingContent});
+  res.render('home', { homeStartingContent });
 })
 
 app.get('/about', (req, res) => {
-  res.render('about', {aboutContent});
+  res.render('about', { aboutContent });
 })
 
 app.get('/contact', (req, res) => {
-  res.render('contact', {contactContent});
+  res.render('contact', { contactContent });
 })
 
 app.get('/compose', (req, res) => {
@@ -54,10 +54,10 @@ app.get('/posts/:postName', (req, res) => {
         title: post.title,
         content: post.content
       });
-  }
+    }
   });
 
-   
+
 })
 
 
