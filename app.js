@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 app.use(express.urlencoded({ extended: true }));
 const ejs = require("ejs");  //ejs
 const _ = require('lodash'); //lodash
+const mongoose = require('mongoose'); //mongoose
+mongoose.connect('mongodb://127.0.0.1:27017/blogDB'); 
 global.POSTS = [];
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -16,6 +18,12 @@ app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'ejs'); //view engine to ejs set
 app.use(express.static("public"));
 
+const postSchema = {
+  title: String,
+  content: String
+};
+
+const Post = mongoose.model("Post", postSchema);
 
 app.get('/', (req, res) => {
   res.render('home', { homeStartingContent });
@@ -34,11 +42,12 @@ app.get('/compose', (req, res) => {
 })
 
 app.post('/compose', (req, res) => {
-  var post = {
+  const post = new Post ({
     title: req.body.postTitle,
     content: req.body.postBody
-  };
-  global.POSTS.push(post);
+  });
+
+  post.save();
   res.redirect('/');
 })
 
