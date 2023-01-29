@@ -51,28 +51,29 @@ app.post('/compose', (req, res) => {
     content: req.body.postBody
   });
 
-  post.save();
-  res.redirect('/');
+  post.save((err) => {
+    if (!err){
+        res.redirect("/");
+    }
+  });
 })
 
 // Route Parameters
-app.get('/posts/:postName', (req, res) => {
-  const requestedTitle = _.lowerCase(req.params.postName); //lowercase implementation(khabab case)
-
-  POSTS.forEach(post => {
-    const storedTitle = _.lowerCase(post.title);
-
-    if (storedTitle === requestedTitle) {
-      res.render('post', {
-        title: post.title,
-        content: post.content
+app.get("/posts/:postId", (req, res) => {
+  const requestedPostId = req.params.postId;
+    // const requestedTitle = _.lowerCase(req.params.postName);
+   
+    // posts.forEach(post => {
+      // const storedTitle = _.lowerCase(post.title);
+   
+      Post.findOne({_id: requestedPostId}, (err, post) => {
+        res.render("post", {
+          title: post.title,
+          content: post.content
+        });
       });
-    }
-  });
-
-
-})
-
+    });
+  // });
 
 
 app.listen(port, () => {
